@@ -2,7 +2,6 @@
 
 namespace Europa\Robo;
 
-use Robo\Robo;
 use Robo\Tasks as RoboTasks;
 
 /**
@@ -63,19 +62,6 @@ class Tasks extends RoboTasks {
         $this->config('database.name')))
       ->siteInstall($this->config('site.profile'))
       ->run();
-  }
-
-  /**
-   * Fetch a configuration value.
-   *
-   * @param string $key
-   *   Which config item to look up.
-   *
-   * @return mixed
-   *   Configuration value.
-   */
-  protected function config($key) {
-    return Robo::config()->get($key);
   }
 
   /**

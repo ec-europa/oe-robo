@@ -25,13 +25,9 @@ class Tasks extends RoboTasks {
    */
   public function projectSetupBehat() {
     $tokens = $this->config('behat.tokens');
-    $from = array_map(function ($item) {
-      return "!$item";
-    }, array_keys($tokens));
-
     return $this->collectionBuilder()->addTaskList([
       $this->taskFilesystemStack()->copy($this->config('behat.source'), $this->config('behat.destination'), TRUE),
-      $this->taskReplaceInFile($this->config('behat.destination'))->from($from)->to($tokens),
+      $this->taskReplaceInFile($this->config('behat.destination'))->from(array_keys($tokens))->to($tokens),
     ]);
   }
 

@@ -3,3 +3,4 @@ imports:
 parameters:
   tasks.phpcs.ignore_patterns:
     - vendor/
+    - tests/

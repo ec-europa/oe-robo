@@ -2,6 +2,7 @@
 
 namespace Europa\Robo;
 
+use Robo\Robo;
 use Robo\Tasks as RoboTasks;
 
 /**
@@ -17,30 +18,65 @@ class Tasks extends RoboTasks {
   /**
    * Setup Behat.
    *
-   * @return \Robo\Collection\CollectionBuilder
-   *   Collection builder.
-   *
    * @command project:setup-behat
    * @aliases psb
    */
   public function projectSetupBehat() {
     $tokens = $this->config('behat.tokens');
-    return $this->collectionBuilder()->addTaskList([
+    $this->collectionBuilder()->addTaskList([
       $this->taskFilesystemStack()->copy($this->config('behat.source'), $this->config('behat.destination'), TRUE),
       $this->taskReplaceInFile($this->config('behat.destination'))->from(array_keys($tokens))->to($tokens),
-    ]);
+    ])->run();
   }
 
   /**
    * Install site.
    *
-   * @return \Robo\Collection\CollectionBuilder
-   *   Collection builder.
-   *
    * @command project:install
    * @aliases pi
    */
   public function projectInstall() {
+    $this->getInstallTask()->run();
+    $this->projectSetupSettings();
+  }
+
+  /**
+   * Install site from given configuration.
+   *
+   * @command project:install-config
+   * @aliases pic
+   */
+  public function projectInstallConfig() {
+    $this->getInstallTask()
+      ->siteInstall('config_installer')
+      ->arg('config_installer_sync_configure_form.sync_directory=' . $this->config('settings.config_directories.sync'))
+      ->run();
+    $this->projectSetupSettings();
+  }
+
+  /**
+   * Setup Drupal settings.
+   *
+   * @command project:setup-settings
+   * @aliases pss
+   */
+  public function projectSetupSettings() {
+    $settings_file = $this->root() . '/build/sites/default/settings.php';
+    $processor = new SettingsProcessor(Robo::config());
+    $content = $processor->process($settings_file);
+    $this->collectionBuilder()->addTaskList([
+      $this->taskFilesystemStack()->chmod('build/sites', 0775, 0000, TRUE),
+      $this->taskWriteToFile($settings_file)->text($content),
+    ])->run();
+  }
+
+  /**
+   * Get installation task.
+   *
+   * @return \Boedah\Robo\Task\Drush\DrushStack
+   *   Drush installation task.
+   */
+  protected function getInstallTask() {
     return $this->taskDrushStack($this->config('bin.drush'))
       ->arg("--root={$this->root()}/build")
       ->siteName($this->config('site.name'))
@@ -56,8 +92,7 @@ class Tasks extends RoboTasks {
         $this->config('database.host'),
         $this->config('database.port'),
         $this->config('database.name')))
-      ->siteInstall($this->config('site.profile'))
-      ->run();
+      ->siteInstall($this->config('site.profile'));
   }
 
   /**

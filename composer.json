@@ -10,7 +10,8 @@
     "boedah/robo-drush": "~3"
   },
   "require-dev": {
-    "ec-europa/poc-code-review": "*"
+    "ec-europa/poc-code-review": "*",
+    "phpunit/phpunit": "^6.1"
   },
   "repositories": [
     {
@@ -20,7 +21,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Europa\\Robo\\": "./src/"
+      "Europa\\Robo\\": "./src/",
+      "Europa\\Robo\\Tests\\": "./tests/"
     }
   }
 }

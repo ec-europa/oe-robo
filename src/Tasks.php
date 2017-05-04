@@ -36,7 +36,9 @@ class Tasks extends RoboTasks {
    * @aliases pi
    */
   public function projectInstall() {
-    $this->getInstallTask()->run();
+    $this->getInstallTask()
+      ->siteInstall($this->config('site.profile'))
+      ->run();
     $this->projectSetupSettings();
   }
 
@@ -48,8 +50,8 @@ class Tasks extends RoboTasks {
    */
   public function projectInstallConfig() {
     $this->getInstallTask()
-      ->siteInstall('config_installer')
       ->arg('config_installer_sync_configure_form.sync_directory=' . $this->config('settings.config_directories.sync'))
+      ->siteInstall('config_installer')
       ->run();
     $this->projectSetupSettings();
   }
@@ -91,8 +93,7 @@ class Tasks extends RoboTasks {
         $this->config('database.password'),
         $this->config('database.host'),
         $this->config('database.port'),
-        $this->config('database.name')))
-      ->siteInstall($this->config('site.profile'));
+        $this->config('database.name')));
   }
 
   /**

@@ -1,5 +1,7 @@
 # OpenEuropa Robo integration
 
+[![Build Status](https://travis-ci.com/ec-europa/oe-robo.svg?token=dqSmBxPQnRgBZvpCZAqo&branch=master)](https://travis-ci.com/ec-europa/oe-robo)
+
 OpenEuropa build system based on [Robo](http://robo.li/).
 
 ## Usage

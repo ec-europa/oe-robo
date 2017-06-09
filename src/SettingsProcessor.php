@@ -1,13 +1,13 @@
 <?php
 
-namespace Europa\Robo;
+namespace EC\OpenEuropa\Robo;
 
 use Robo\Config\Config;
 
 /**
  * Class SettingsProcessor.
  *
- * @package Europa\Robo
+ * @package EC\OpenEuropa\Robo
  */
 class SettingsProcessor {
 

@@ -1,5 +1,5 @@
 {
-  "name": "ec-europa/poc-robo",
+  "name": "ec-europa/oe-robo",
   "license": "EUPL-1.1",
   "type": "robo-tasks",
   "minimum-stability": "dev",
@@ -10,16 +10,13 @@
     "boedah/robo-drush": "~3"
   },
   "require-dev": {
-    "ec-europa/poc-code-review": "*",
+    "ec-europa/oe-code-review": "*",
     "phpunit/phpunit": "^6.1"
   },
-  "repositories": [
-    { "type": "git", "url": "https://github.com/ec-europa/poc-code-review.git" }
-  ],
   "autoload": {
     "psr-4": {
-      "Europa\\Robo\\": "./src/",
-      "Europa\\Robo\\Tests\\": "./tests/"
+      "EC\\OpenEuropa\\Robo\\": "./src/",
+      "EC\\OpenEuropa\\Robo\\Tests\\": "./tests/"
     }
   }
 }

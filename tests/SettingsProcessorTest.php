@@ -1,8 +1,8 @@
 <?php
 
-namespace Europa\Robo\Tests;
+namespace EC\OpenEuropa\Robo\Tests;
 
-use Europa\Robo\SettingsProcessor;
+use EC\OpenEuropa\Robo\SettingsProcessor;
 use PHPUnit\Framework\TestCase;
 use Robo\Config\Config;
 use Robo\Config\YamlConfigLoader;
@@ -10,7 +10,7 @@ use Robo\Config\YamlConfigLoader;
 /**
  * Class SettingsProcessorTest.
  *
- * @package Europa\Robo\Tests
+ * @package EC\OpenEuropa\Robo\Tests
  */
 class SettingsProcessorTest extends TestCase {
 

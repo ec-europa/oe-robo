@@ -1,15 +1,15 @@
-# Robo integration
+# OpenEuropa Robo integration
 
-[Robo](http://robo.li/) commands and dependencies for Drupal 8 POC build.
+OpenEuropa build system based on [Robo](http://robo.li/).
 
 ## Usage
 
-Make sure your `RoboFile` class extends `Europa\Robo\Tasks`:
+Make sure your `RoboFile` class extends `EC\OpenEuropa\Robo\Tasks`:
 
 ```php
 <?php
 
-use Europa\Robo\Tasks;
+use EC\OpenEuropa\Robo\Tasks;
 
 /**
  * Class RoboFile.
@@ -29,8 +29,10 @@ $ ./vendor/bin/robo
 
 | Command | Description |
 |---|---|
-| `project:install` | Install project |
-| `project:setup-behat` | Setup Behat |
+| `project:install` | Install project from scratch |
+| `project:install-config` | Install project from existing configuration |
+| `project:setup-settings` | Setup Drupal `settings.php` file |
+| `project:setup-behat` | Setup Behat test environment |
 
 ## Configuration
 
@@ -41,7 +43,7 @@ Build commands can be configured by providing the following configuration parame
 site:
   name: Site name
   mail: info@example.org
-  profile: poc_profile
+  profile: oe_profile
   update: false
   locale: en
 
@@ -53,26 +55,31 @@ account:
 
 # Database parameters.
 database:
-  host: localhost
+  host: 127.0.0.1
   port: 3306
   name: drupal
   user: root
-  password: root
+  password: ''
   prefix: ''
 
 # Behat settings.
 behat:
   # Behat configuration template.
-  source: resources/behat.yml.dist
+  source: behat.yml.dist
   # Resulting Behat configuration file after performing token replacement.
-  destination: behat.yml.dist
+  destination: behat.yml
   # Following tokens will be automatically replaced when running "project:setup-behat".
   tokens:
-    !base_url: http://localhost
-    !drupal_root: build
+    _base_url: http://localhost
 
+# Binary location.
 bin:
   drush: ./vendor/bin/drush
+
+# Parameters for Drupal's settings.php.
+settings:
+  config_directories:
+    sync: ../config/sync
 ```
 
 Configuration is processed by the [Robo Config](https://github.com/nuvoleweb/robo-config) project, check its `README.md`

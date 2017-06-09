@@ -1,6 +1,6 @@
 <?php
 
-namespace Europa\Robo;
+namespace EC\OpenEuropa\Robo;
 
 use Robo\Robo;
 use Robo\Tasks as RoboTasks;
@@ -8,7 +8,7 @@ use Robo\Tasks as RoboTasks;
 /**
  * Class Tasks.
  *
- * @package Europa\Robo\Task\Build
+ * @package EC\OpenEuropa\Robo\Task\Build
  */
 class Tasks extends RoboTasks {
 

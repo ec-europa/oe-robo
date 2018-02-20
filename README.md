@@ -1,3 +1,5 @@
+**Abandoned. Check the [OpenEuropa project](https://github.com/openeuropa/openeuropa) for more information.**
+
 # OpenEuropa Robo integration
 
 [![Build Status](https://travis-ci.org/ec-europa/oe-robo.svg?branch=master)](https://travis-ci.org/ec-europa/oe-robo)
